@@ -5,10 +5,6 @@ Utilities of BST:
 3) O(log n) search, insert, delete (assuming it's balanced)
 
 """
-
-from sqlalchemy import true
-
-
 class BinarySearchTreeNode:
     def __init__(self, data):
         self.data = data
@@ -43,6 +39,17 @@ class BinarySearchTreeNode:
                 return self.right.search(target)
             else:
                 return False
+    
+    def find_height(self):
+        if self.left:
+            left_height = self.left.find_height()
+        else:
+            left_height = -1
+        if self.right:
+            right_height = self.right.find_height()
+        else:
+            right_height = -1
+        return max(left_height, right_height) + 1
 
     def in_order_traversal(self): # left root right
         elements = [] 
@@ -87,13 +94,4 @@ if __name__ == '__main__':
     print(root.pre_order_traversal())
     print(root.post_order_traversal())
     print(root.search(4))
-
-
-        
-
-
-        
-
-
-
-
+    print(root.find_height())
